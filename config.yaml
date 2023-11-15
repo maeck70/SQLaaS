@@ -1,0 +1,57 @@
+Db:
+  dbhost:      "10.0.0.180"
+  dbport:      3306
+  dbuser:      "twisty_dex"
+  dbpassword:  "wonderwall"
+  dbname:      "twistygo_dex"
+  # dbparams:    "?parseTime=true"
+  serviceport: 8080
+
+Services:
+  activetoken:
+    url:  "/activetoken/{token}"
+    sql:  "SELECT token, type, last_seen_dttm FROM blockchain_activetokens WHERE token = ?"
+    type: "GET"
+    fields:
+      token:
+        type: "string"
+      type:
+        type: "int"
+      last_seen_dttm:
+        type: "datetime"
+    arguments:
+      token:
+        type: "string"
+
+  activetokens:
+    url:  "/activetokens"
+    sql:  "SELECT token, type, last_seen_dttm FROM blockchain_activetokens"
+    type: "GET"
+    fields:
+      token:
+        type: "string"
+      type:
+        type: "int"
+      last_seen_dttm:
+        type: "datetime"
+
+  pricingjob:
+    name: "pricingjob"
+    url:  "/pricingjob"
+    sql:  "select job_id, status, source, route, last_update, next_scheduled, run_interval from blockchain_pricingjob_go"
+    type: "GET"
+    fields:
+      job_id:
+        type: "int"
+      status:
+        type: "string"
+      source:
+        type: "string"
+      route:
+        type: "string"
+      last_update:
+        type: "datetime"
+      next_scheduled":
+        type: "datetime"
+      run_interval":
+        type: "int"
