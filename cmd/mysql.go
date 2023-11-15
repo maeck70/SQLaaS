@@ -15,12 +15,12 @@ var db *sqlx.DB
 func ConnectMySql() {
 
 	mysqluri := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s%s",
-		"twisty_dex",
-		"wonderwall",
-		"10.0.0.180",
-		3306,
-		"twistygo_dex",
-		"?parseTime=true",
+		settings.Db.DbUser,
+		settings.Db.DbPassword,
+		settings.Db.DbHost,
+		settings.Db.DbPort,
+		settings.Db.DbName,
+		settings.Db.DbParams,
 	)
 
 	log.Printf("Connecting to Database using %s\n", mysqluri)
